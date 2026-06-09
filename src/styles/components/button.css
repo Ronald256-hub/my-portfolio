@@ -1,0 +1,252 @@
+/**
+ * BUTTON COMPONENT STYLES
+ * 
+ * Encapsulates all button variations with proper semantics,
+ * accessibility, and interactive states.
+ * 
+ * Variations: primary, secondary
+ * States: default, hover, active, disabled
+ */
+
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--space-2);
+  
+  padding: var(--btn-padding-y) var(--btn-padding-x);
+  font-size: var(--btn-font-size);
+  font-weight: var(--btn-font-weight);
+  border-radius: var(--btn-border-radius);
+  border: none;
+  
+  cursor: pointer;
+  text-align: center;
+  text-decoration: none;
+  white-space: nowrap;
+  user-select: none;
+  
+  transition: 
+    background-color var(--transition-base),
+    border-color var(--transition-base),
+    box-shadow var(--transition-base),
+    transform var(--transition-base),
+    color var(--transition-base);
+
+  /* Focus Accessible Outline */
+  &:focus-visible {
+    outline: var(--outline-width) solid var(--outline-color);
+    outline-offset: var(--outline-offset);
+  }
+
+  /* Disabled State */
+  &:disabled {
+    opacity: 0.6;
+    cursor: not-allowed;
+    transform: none;
+
+    &:hover,
+    &:active {
+      background-color: inherit;
+      transform: none;
+    }
+  }
+
+  /* Active State */
+  &:active:not(:disabled) {
+    transform: scale(0.98);
+  }
+}
+
+/* ========================================
+   BUTTON VARIANTS
+======================================== */
+
+/**
+ * Primary Button
+ * 
+ * High emphasis action button with gradient background.
+ * Used for primary CTAs and main actions.
+ * 
+ * Improvements:
+ * - Gradient provides visual hierarchy
+ * - Shadow elevation for depth
+ * - Smooth lift animation on hover
+ */
+.btn-primary {
+  background: linear-gradient(
+    135deg,
+    var(--brand-primary),
+    var(--brand-primary-light)
+  );
+  color: var(--text-primary);
+  box-shadow: 0 10px 25px rgba(13, 110, 253, 0.35);
+
+  &:hover:not(:disabled) {
+    transform: translateY(-2px);
+    box-shadow: 0 15px 35px rgba(13, 110, 253, 0.45);
+  }
+
+  &:active:not(:disabled) {
+    transform: translateY(-1px);
+  }
+}
+
+/**
+ * Secondary Button
+ * 
+ * Lower emphasis button with outlined style.
+ * Used for secondary actions and toggles.
+ */
+.btn-secondary {
+  background-color: transparent;
+  color: var(--text-primary);
+  border: 2px solid var(--text-primary);
+
+  &:hover:not(:disabled) {
+    background-color: var(--text-primary);
+    color: var(--bg-primary);
+    transform: translateY(-2px);
+  }
+}
+
+/**
+ * Accent Button
+ * 
+ * Alternative primary variant for specific contexts.
+ */
+.btn-accent {
+  background-color: var(--brand-primary);
+  color: var(--text-primary);
+
+  &:hover:not(:disabled) {
+    background-color: var(--brand-primary-light);
+    transform: translateY(-2px);
+  }
+}
+
+/**
+ * Ghost Button
+ * 
+ * Minimal button with only text and hover background.
+ */
+.btn-ghost {
+  background-color: transparent;
+  color: var(--brand-primary);
+
+  &:hover:not(:disabled) {
+    background-color: var(--bg-hover);
+  }
+}
+
+/* ========================================
+   BUTTON SIZES
+======================================== */
+
+.btn-sm {
+  padding: var(--space-2) var(--space-6);
+  font-size: var(--font-size-sm);
+}
+
+.btn-lg {
+  padding: var(--space-6) var(--space-16);
+  font-size: var(--font-size-lg);
+}
+
+/* ========================================
+   BUTTON ICON SUPPORT
+======================================== */
+
+.btn-icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 2.5rem;
+  height: 2.5rem;
+  padding: 0;
+  border-radius: var(--radius-full);
+
+  svg {
+    width: 1.25rem;
+    height: 1.25rem;
+  }
+}
+
+/* ========================================
+   BUTTON GROUPS
+======================================== */
+
+.btn-group {
+  display: flex;
+  gap: var(--space-4);
+  flex-wrap: wrap;
+
+  @media (max-width: 480px) {
+    flex-direction: column;
+
+    .btn {
+      width: 100%;
+    }
+  }
+}
+
+/* ========================================
+   RIPPLE EFFECT (Interactive Feedback)
+======================================== */
+
+.btn-ripple {
+  position: relative;
+  overflow: hidden;
+
+  &::after {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 0;
+    height: 0;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.5);
+    transform: translate(-50%, -50%);
+    pointer-events: none;
+  }
+
+  &:active::after {
+    animation: ripple 0.6s ease-out;
+  }
+}
+
+@keyframes ripple {
+  to {
+    width: 300px;
+    height: 300px;
+    opacity: 0;
+  }
+}
+
+/* ========================================
+   LOADING STATE
+======================================== */
+
+.btn-loading {
+  color: transparent;
+  pointer-events: none;
+
+  &::before {
+    content: '';
+    position: absolute;
+    width: 1rem;
+    height: 1rem;
+    margin: auto;
+    border: 2px solid transparent;
+    border-radius: 50%;
+    border-top-color: currentColor;
+    animation: spin 1s linear infinite;
+  }
+}
+
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
