@@ -1,0 +1,238 @@
+/**
+ * HEADER & NAVIGATION COMPONENT STYLES
+ * 
+ * Sticky header with responsive navigation menu.
+ * Includes mobile hamburger menu and smooth transitions.
+ * 
+ * Improvements:
+ * - Responsive design
+ * - Smooth scroll behavior
+ * - Accessible mobile menu
+ * - Proper z-index hierarchy
+ */
+
+#header {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  z-index: var(--z-fixed);
+  backdrop-filter: blur(18px);
+  background: rgba(22, 24, 29, 0.8);
+  border-bottom: var(--border-width) solid var(--border-color);
+
+  transition: 
+    background-color var(--transition-base),
+    box-shadow var(--transition-base);
+}
+
+#header.scrolled {
+  background: rgba(22, 24, 29, 0.95);
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+}
+
+#header .container {
+  height: var(--header-height);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: var(--space-12);
+}
+
+/* ========================================
+   LOGO
+======================================== */
+
+.logo a {
+  font-size: var(--font-size-xl);
+  font-weight: var(--font-weight-bold);
+  color: var(--text-primary);
+  transition: color var(--transition-fast);
+  text-decoration: none;
+  white-space: nowrap;
+
+  &:hover,
+  &:focus-visible {
+    color: var(--brand-primary);
+  }
+}
+
+.logo span {
+  color: var(--brand-primary);
+}
+
+/* ========================================
+   NAVIGATION
+======================================== */
+
+nav {
+  flex: 1;
+  display: flex;
+  align-items: center;
+}
+
+nav ul {
+  display: flex;
+  gap: var(--space-8);
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+nav ul li a {
+  color: var(--text-primary);
+  font-size: var(--font-size-sm);
+  font-weight: var(--font-weight-medium);
+  position: relative;
+  transition: color var(--transition-base);
+  text-decoration: none;
+
+  /* Underline Animation */
+  &::after {
+    content: '';
+    position: absolute;
+    left: 0;
+    bottom: -6px;
+    width: 0;
+    height: 2px;
+    background: var(--brand-primary);
+    transition: width var(--transition-base);
+  }
+
+  &:hover::after,
+  &:focus::after {
+    width: 100%;
+  }
+
+  &:hover,
+  &:focus,
+  &.active {
+    color: var(--brand-primary);
+  }
+
+  &:focus-visible {
+    outline: 2px solid var(--brand-primary);
+    outline-offset: 4px;
+  }
+}
+
+/* ========================================
+   MOBILE MENU BUTTON
+======================================== */
+
+.menu-btn {
+  display: none;
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: var(--space-2);
+  width: 44px;
+  height: 44px;
+
+  &:focus-visible {
+    outline: 2px solid var(--brand-primary);
+    outline-offset: 2px;
+  }
+}
+
+.menu-btn span {
+  display: block;
+  width: 25px;
+  height: 3px;
+  background: var(--text-primary);
+  margin: var(--space-1) 0;
+  transition: all var(--transition-fast);
+  border-radius: 2px;
+}
+
+.menu-btn.active span:nth-child(1) {
+  transform: rotate(45deg) translateY(10px);
+}
+
+.menu-btn.active span:nth-child(2) {
+  opacity: 0;
+}
+
+.menu-btn.active span:nth-child(3) {
+  transform: rotate(-45deg) translateY(-10px);
+}
+
+/* ========================================
+   MOBILE NAVIGATION
+======================================== */
+
+@media (max-width: 768px) {
+  #header .container {
+    gap: var(--space-6);
+  }
+
+  nav {
+    position: fixed;
+    top: var(--header-height);
+    left: 0;
+    width: 100%;
+    background: rgba(22, 24, 29, 0.95);
+    border-bottom: var(--border-width) solid var(--border-color);
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height var(--transition-base);
+    z-index: var(--z-sticky);
+    flex: none;
+  }
+
+  nav.active {
+    max-height: 400px;
+  }
+
+  nav ul {
+    flex-direction: column;
+    gap: 0;
+    padding: var(--space-4) 0;
+    width: 100%;
+  }
+
+  nav ul li a {
+    display: block;
+    padding: var(--space-4) var(--space-6);
+    font-size: var(--font-size-base);
+    border-radius: 0;
+
+    &::after {
+      display: none;
+    }
+
+    &:hover,
+    &.active {
+      background: rgba(13, 110, 253, 0.1);
+      border-left: 3px solid var(--brand-primary);
+      padding-left: calc(var(--space-6) - 3px);
+    }
+  }
+
+  .menu-btn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+}
+
+/* ========================================
+   SKIP LINK (Accessibility)
+======================================== */
+
+.skip-link {
+  position: absolute;
+  top: -40px;
+  left: 0;
+  background: var(--brand-primary);
+  color: var(--text-primary);
+  padding: var(--space-2);
+  text-decoration: none;
+  border-radius: 0 0 4px 0;
+  z-index: var(--z-tooltip);
+  font-weight: var(--font-weight-semibold);
+
+  &:focus {
+    top: 0;
+  }
+}

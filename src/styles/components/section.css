@@ -1,0 +1,148 @@
+/**
+ * SECTION HEADER COMPONENT
+ * 
+ * Reusable section header with consistent styling.
+ * Used at the start of major sections (About, Expertise, etc.)
+ */
+
+.section-header {
+  text-align: center;
+  margin-bottom: var(--space-20);
+}
+
+.section-header span {
+  display: block;
+  color: var(--brand-primary);
+  font-size: var(--font-size-sm);
+  letter-spacing: 3px;
+  text-transform: uppercase;
+  font-weight: var(--font-weight-semibold);
+  margin-bottom: var(--space-4);
+  opacity: 0.9;
+}
+
+.section-header h2 {
+  font-size: var(--font-size-5xl);
+  font-weight: var(--font-weight-bold);
+  margin-top: var(--space-4);
+  line-height: var(--line-height-tight);
+  color: var(--text-primary);
+
+  @media (max-width: 1100px) {
+    font-size: var(--font-size-4xl);
+  }
+
+  @media (max-width: 992px) {
+    font-size: var(--font-size-3xl);
+  }
+
+  @media (max-width: 768px) {
+    font-size: var(--font-size-2xl);
+  }
+
+  @media (max-width: 480px) {
+    font-size: var(--font-size-xl);
+  }
+}
+
+/* ========================================
+   SECTION BODY
+======================================== */
+
+.about-content {
+  max-width: 900px;
+  margin: auto;
+  text-align: center;
+
+  p {
+    color: var(--text-secondary);
+    margin-bottom: var(--space-6);
+    line-height: var(--line-height-loose);
+    font-size: var(--font-size-base);
+
+    &:last-child {
+      margin-bottom: 0;
+    }
+  }
+}
+
+/* ========================================
+   SKILLS/RESPONSIBILITIES LIST
+======================================== */
+
+.skills-list,
+.responsibilities {
+  margin-top: var(--space-6);
+  padding-top: var(--space-6);
+  border-top: var(--border-width) solid var(--border-color);
+  list-style: none;
+}
+
+.skills-list li,
+.responsibilities li {
+  color: var(--text-secondary);
+  font-size: var(--font-size-sm);
+  padding: var(--space-3) 0;
+  padding-left: var(--space-6);
+  position: relative;
+
+  &:before {
+    position: absolute;
+    left: 0;
+    font-weight: var(--font-weight-bold);
+  }
+}
+
+.skills-list li:before {
+  content: '→';
+  color: var(--brand-primary);
+  margin-right: var(--space-2);
+}
+
+.responsibilities li:before {
+  content: '✓';
+  color: var(--status-success);
+  margin-right: var(--space-2);
+}
+
+/* ========================================
+   PROJECT TAGS
+======================================== */
+
+.project-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-2);
+  margin-top: auto;
+  padding-top: var(--space-4);
+}
+
+.tag {
+  background: rgba(13, 110, 253, 0.15);
+  color: var(--brand-primary);
+  padding: var(--space-1) var(--space-3);
+  border-radius: var(--radius-full);
+  font-size: var(--font-size-xs);
+  border: 1px solid rgba(13, 110, 253, 0.3);
+  font-weight: var(--font-weight-medium);
+
+  transition: 
+    background-color var(--transition-fast),
+    border-color var(--transition-fast);
+
+  &:hover {
+    background: rgba(13, 110, 253, 0.25);
+    border-color: rgba(13, 110, 253, 0.5);
+  }
+}
+
+/* ========================================
+   EXPERIENCE DATE
+======================================== */
+
+.experience-date {
+  color: var(--text-secondary);
+  font-size: var(--font-size-sm);
+  margin-bottom: var(--space-4);
+  font-weight: var(--font-weight-medium);
+}
